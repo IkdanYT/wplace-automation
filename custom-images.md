@@ -1,27 +1,27 @@
-# 🖼️ Exemplos de Imagens Personalizadas
+# 🖼️ Custom Image Examples
 
-Este arquivo contém exemplos de como usar imagens convertidas no WPlace Bot, além de métodos para criar suas próprias imagens.
+This file contains examples of how to use converted images in WPlace Bot, plus methods to create your own images.
 
-## 🎨 Métodos para Criar Imagens
+## 🎨 Methods to Create Images
 
-### 1. 🆕 Conversor Web Automático (Recomendado)
-- Abra `image-converter.html` no navegador
-- Arraste ou selecione sua imagem (PNG, JPG, GIF)
-- Configure tamanho máximo e modo de cor
-- Visualize o resultado em tempo real
-- Gere o script pronto para usar
-- Copie e cole no console do wplace.live
+### 1. 🆕 Automatic Web Converter (Recommended)
+- Open `image-converter.html` in browser
+- Drag or select your image (PNG, JPG, GIF)
+- Configure maximum size and color mode
+- Preview result in real time
+- Generate ready-to-use script
+- Copy and paste in wplace.live console
 
-### 2. 📁 Upload Direto no Painel
-- Use o botão "📁 Carregar Imagem" no painel do bot
-- Selecione sua imagem
-- Será automaticamente redimensionada e carregada
+### 2. 📁 Direct Upload in Panel
+- Use the "📁 Load Image" button in the bot panel
+- Select your image
+- Will be automatically resized and loaded
 
-### 3. Método Manual (Para Pixel Art Simples)
+### 3. Manual Method (For Simple Pixel Art)
 
 ```javascript
-// Exemplo: Cruz 5x5
-const cruz = [
+// Example: 5x5 Cross
+const cross = [
     '#FFFFFF', '#FFFFFF', '#FF0000', '#FFFFFF', '#FFFFFF',
     '#FFFFFF', '#FFFFFF', '#FF0000', '#FFFFFF', '#FFFFFF', 
     '#FF0000', '#FF0000', '#FF0000', '#FF0000', '#FF0000',
@@ -29,13 +29,13 @@ const cruz = [
     '#FFFFFF', '#FFFFFF', '#FF0000', '#FFFFFF', '#FFFFFF'
 ];
 
-wplaceBot.loadSimpleImage(cruz, 5, 5);
+wplaceBot.loadSimpleImage(cross, 5, 5);
 ```
 
-### 2. Método com Emojis (Visual)
+### 2. Emoji Method (Visual)
 
 ```javascript
-// Exemplo: Quadrado com X
+// Example: Square with X
 const design = [
     '🟥', '⬜', '⬜', '⬜', '🟥',
     '⬜', '🟥', '⬜', '🟥', '⬜',
@@ -53,10 +53,10 @@ const imageData = design.map(emoji => colorMap[emoji]);
 wplaceBot.loadSimpleImage(imageData, 5, 5);
 ```
 
-### 3. Método com String Multi-linha
+### 3. Multi-line String Method
 
 ```javascript
-// Exemplo: Seta para cima
+// Example: Up Arrow
 const arrow = `
 ⬜⬜🟦⬜⬜
 ⬜🟦🟦🟦⬜
@@ -74,9 +74,9 @@ const pixels = Array.from(arrow).map(char => colors[char] || '#FFFFFF');
 wplaceBot.loadSimpleImage(pixels, 5, 5);
 ```
 
-## 🔧 Ferramentas Auxiliares
+## 🔧 Helper Tools
 
-### Função para Criar Retângulo
+### Function to Create Rectangle
 
 ```javascript
 function createRectangle(width, height, color, borderColor = null) {
@@ -84,7 +84,7 @@ function createRectangle(width, height, color, borderColor = null) {
     
     for (let y = 0; y < height; y++) {
         for (let x = 0; x < width; x++) {
-            // Se tem borda e está na borda
+            // If has border and is on border
             if (borderColor && (x === 0 || x === width-1 || y === 0 || y === height-1)) {
                 pixels.push(borderColor);
             } else {
@@ -96,12 +96,12 @@ function createRectangle(width, height, color, borderColor = null) {
     return pixels;
 }
 
-// Uso:
+// Usage:
 const rect = createRectangle(8, 6, '#FF0000', '#000000');
 wplaceBot.loadSimpleImage(rect, 8, 6);
 ```
 
-### Função para Criar Círculo
+### Function to Create Circle
 
 ```javascript
 function createCircle(radius, fillColor, bgColor = '#FFFFFF') {
@@ -119,16 +119,16 @@ function createCircle(radius, fillColor, bgColor = '#FFFFFF') {
     return pixels;
 }
 
-// Uso:
+// Usage:
 const circle = createCircle(4, '#00FF00');
 wplaceBot.loadSimpleImage(circle, 9, 9);
 ```
 
-### Função para Texto Simples
+### Function for Simple Text
 
 ```javascript
 function createText(text, color = '#000000', bgColor = '#FFFFFF') {
-    // Fonte 3x5 simples
+    // Simple 3x5 font
     const font = {
         'A': [
             '⬜🟦⬜',
@@ -151,7 +151,7 @@ function createText(text, color = '#000000', bgColor = '#FFFFFF') {
             '🟦⬜⬜',
             '⬜🟦🟦'
         ]
-        // Adicione mais letras conforme necessário
+        // Add more letters as needed
     };
     
     const letters = text.toUpperCase().split('');
@@ -165,23 +165,23 @@ function createText(text, color = '#000000', bgColor = '#FFFFFF') {
                     pixels.push(char === '🟦' ? color : bgColor);
                 }
             }
-            // Espaço entre letras
+            // Space between letters
             pixels.push(bgColor);
         }
     }
     
-    const width = letters.length * 4 - 1; // 3 + 1 espaço, menos último espaço
+    const width = letters.length * 4 - 1; // 3 + 1 space, minus last space
     return { pixels, width, height: 5 };
 }
 
-// Uso:
+// Usage:
 const textData = createText('ABC', '#FF0000');
 wplaceBot.loadSimpleImage(textData.pixels, textData.width, textData.height);
 ```
 
-## 🎯 Exemplos Prontos
+## 🎯 Ready Examples
 
-### Pokébola (8x8)
+### Pokéball (8x8)
 
 ```javascript
 const pokeball = [
@@ -205,7 +205,7 @@ const pokeData = pokeball.map(emoji => pokeColors[emoji]);
 wplaceBot.loadSimpleImage(pokeData, 8, 8);
 ```
 
-### Bandeira do Brasil (9x6)
+### Brazil Flag (9x6)
 
 ```javascript
 const brasilFlag = [
@@ -249,13 +249,13 @@ const pacData = pacman.map(emoji => pacColors[emoji]);
 wplaceBot.loadSimpleImage(pacData, 7, 7);
 ```
 
-## 🛠️ Dicas Avançadas
+## 🛠️ Advanced Tips
 
-### 1. Converter Imagem Real para Pixel Art
+### 1. Convert Real Image to Pixel Art
 
 ```javascript
-// Use esta função para converter uma imagem para array de cores
-// (precisa carregar a imagem em um canvas primeiro)
+// Use this function to convert an image to color array
+// (need to load image in canvas first)
 function imageToPixelArray(canvas, width, height) {
     const ctx = canvas.getContext('2d');
     const imageData = ctx.getImageData(0, 0, width, height);
@@ -274,80 +274,80 @@ function imageToPixelArray(canvas, width, height) {
 }
 ```
 
-### 2. Paleta de Cores Comum
+### 2. Common Color Palette
 
 ```javascript
 const commonColors = {
-    'preto': '#000000',
-    'branco': '#FFFFFF',
-    'vermelho': '#FF0000',
-    'verde': '#00FF00',
-    'azul': '#0000FF',
-    'amarelo': '#FFFF00',
+    'black': '#000000',
+    'white': '#FFFFFF',
+    'red': '#FF0000',
+    'green': '#00FF00',
+    'blue': '#0000FF',
+    'yellow': '#FFFF00',
     'magenta': '#FF00FF',
-    'ciano': '#00FFFF',
-    'laranja': '#FFA500',
-    'roxo': '#800080',
-    'rosa': '#FFC0CB',
-    'cinza': '#808080',
-    'marrom': '#8B4513',
+    'cyan': '#00FFFF',
+    'orange': '#FFA500',
+    'purple': '#800080',
+    'pink': '#FFC0CB',
+    'gray': '#808080',
+    'brown': '#8B4513',
     'lime': '#32CD32',
     'navy': '#000080'
 };
 ```
 
-### 3. Validar Imagem Antes de Usar
+### 3. Validate Image Before Use
 
 ```javascript
 function validateImage(pixels, width, height) {
     if (pixels.length !== width * height) {
-        console.error(`❌ Erro: esperado ${width * height} pixels, encontrado ${pixels.length}`);
+        console.error(`❌ Error: expected ${width * height} pixels, found ${pixels.length}`);
         return false;
     }
     
-    // Verificar se todas as cores são válidas
+    // Check if all colors are valid
     const invalidColors = pixels.filter(color => !/^#[0-9A-F]{6}$/i.test(color));
     if (invalidColors.length > 0) {
-        console.error(`❌ Cores inválidas encontradas:`, invalidColors);
+        console.error(`❌ Invalid colors found:`, invalidColors);
         return false;
     }
     
-    console.log(`✅ Imagem válida: ${width}x${height}`);
+    console.log(`✅ Valid image: ${width}x${height}`);
     return true;
 }
 
-// Uso:
-if (validateImage(meuPixels, 8, 8)) {
-    wplaceBot.loadSimpleImage(meuPixels, 8, 8);
+// Usage:
+if (validateImage(myPixels, 8, 8)) {
+    wplaceBot.loadSimpleImage(myPixels, 8, 8);
 }
 ```
 
-## 📝 Template Base
+## 📝 Base Template
 
 ```javascript
-// Template para criar suas próprias imagens
+// Template to create your own images
 function createCustomImage() {
-    // 1. Defina seu design (use emojis para visualizar melhor)
+    // 1. Define your design (use emojis for better visualization)
     const design = [
         '⬜', '⬜', '⬜',
         '⬜', '🟦', '⬜',
         '⬜', '⬜', '⬜'
     ];
     
-    // 2. Mapeie as cores
+    // 2. Map colors
     const colorMap = {
         '⬜': '#FFFFFF',
         '🟦': '#0000FF'
     };
     
-    // 3. Converta para array de cores
+    // 3. Convert to color array
     const pixels = design.map(emoji => colorMap[emoji] || '#FFFFFF');
     
-    // 4. Defina dimensões
+    // 4. Define dimensions
     const width = 3;
     const height = 3;
     
-    // 5. Valide e carregue
+    // 5. Validate and load
     if (validateImage(pixels, width, height)) {
         wplaceBot.loadSimpleImage(pixels, width, height);
         return true;
@@ -356,6 +356,5 @@ function createCustomImage() {
     return false;
 }
 
-// Use a função
+// Use the function
 createCustomImage();
-```
